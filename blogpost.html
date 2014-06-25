@@ -1,0 +1,43 @@
+<h1>tuleap.js.io.hipster : MV* frameworks investigations</h1>
+<h2>Context</h2>
+<p>Hypothesis :</p>
+<ul>
+<li>We could have good performances when handeling a lot data on the same page and while having advanced manipulations like darg'n'drop and filter. (no page refresh)</li>
+<li>This could be done with well structured code (We are not masters of front-end application architecture) and produce good results with only a few lines.</li>
+</ul>
+<p>We decided to test some MV* framework with compatible licences and which handle two-way data binding.</p>
+<h2>Data-binding ?</h2>
+<p>Frameworks which allow data-binding provide a strong connexion between the model and the view. When the model is modified, the view handles these modifications and vice versa. Such javascript frameworks allow to have both the model and the view on the front-end. We can then implement an observer which will notify the backend when the model is modified.</p>
+<p>More details on the <a href="https://docs.angularjs.org/guide/databinding">angular documentation</a></p>
+<h2>Candidates</h2>
+<ul>
+<li><a href="https://angularjs.org/">Angular</a> (MIT) : developped by Google, one of the biggest MVW framework on the market</li>
+<li><a href="http://emberjs.com/">Ember</a> (MIT)   : a framework with a big community</li>
+<li><a href="http://knockoutjs.com/">Knockout</a> (MIT): a small data-binding framework</li>
+</ul>
+<h2>How did we proceed</h2>
+<p>We were 4 developers and we had 2 weeks to validate the hypothesis. We choose to split into two sub-teams and learn and test one framework on each side.</p>
+<p>After 6 days implementing prototypes, the two teams discussed and explained why their frameworks were awesome. </p>
+<p>Finally, one framework was choosen and we tried to validate the hypothesis.</p>
+<p><a href="http://browserify.org/">Browserify</a> was choosen to handle libraries dependencies (jQuery...)</p>
+<h2><del>Ember</del>Knockout team</h2>
+<p>In order to install the last stable release of ember, we had to use <a href="http://bower.io/">bower</a>(a front-end package manager). But to install bower, we had to install <a href="https://www.npmjs.org/">npm</a>(another package manager) before.</p>
+<p>In summary, we had to install two package managers to install emberjs (the last version of ember on npm was 1.0.0, and the stable version of ember was the 1.5.1...). There was also another issue when using browserify: it only searches dependencies in npm packages and not in bower packages (ember..).</p>
+<p><img alt="knockedout" src="byeEmber.gif" /></p>
+<p><em>Bye bye ember, hello knockout !</em></p>
+<p>Instead of emberjs, the stable version of knockout can be installed only through npm. So we didn't need bower.</p>
+<p>Knockout is very light, it only handles two-way data binding. If we wanted to add new features (like routing), we would have to use an external library. 
+Thanks to the <a href="http://learn.knockoutjs.com/#/?tutorial=intro">great tutorial</a>, it was easy to master the framework and <a href="http://knockoutjs.com/documentation/custom-bindings.html">implement new features</a>.</p>
+<h2>Angular team</h2>
+<p>TODO</p>
+<h2>What did we choose and why</h2>
+<p>First, I must say that we thought that knockout.js is a great framework with great documentation, easy to learn and extend. But...</p>
+<p>Angular has :</p>
+<ul>
+<li>features we could need in the future</li>
+<li>a bigger community</li>
+<li>more experts to hire</li>
+</ul>
+<p>Whatsmore, angular is more structured (and our js is somewhat less), so by applying good practices, we know we will be doing it the right way.</p>
+<p><img alt="knockedout" src="knockoutvsangular.gif" /></p>
+<p><em>knocked out</em></p>
