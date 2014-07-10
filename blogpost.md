@@ -39,17 +39,48 @@ Knockout team
 Knockout is very light, it only handles two-way data binding. If we wanted to add new features (like routing), we would have to use an external library. 
 Thanks to the [great tutorial](http://learn.knockoutjs.com/#/?tutorial=intro), it was easy to master the framework and [implement new features](http://knockoutjs.com/documentation/custom-bindings.html).
 
-Comment on a structuré le bouzin :
 
-View <-> ViemModel <-> Model
+A knockout app architecture :
 
-Le ViewModel est connecté via knockout à la vue. Les elements à binder avec le model sont déclarés grâce aux bindings knockout
+View <-> ViemModel <-> Model <-> Server
 
-*Extrait de code de la vue montrant les attributs bindings*
+The Model must be mirror of the Server, and the View must display the Model content.
 
-Du côté du modèle, il s'agit de bêtes "classes" javascript, avec certains attributs liés à la view à l'aide de méthodes fournies par knockout (ko.observe pour que la view prenne la valeur du modèle, ko.value pour que le modèle prenne la valeur d'un input de la vue, etc)
- 
+The ViewModel create the link between view and model. View elements are binded to model with data-bind attribute.
+On the Model side, it's only javascript "classes", with some attributes linked to view through knockout methods, like knockout.observable().
 
+`<p>First name: <strong data-bind="text: firstName"></strong></p>`
+
+
+
+`<p>Last name: <strong data-bind="text: lastName"></strong></p>`
+
+
+`function ViewModel() {`
+
+`   this.firstName = ko.observable("Bert");`
+    
+`   this.lastName = ko.observable("Bertington");`
+
+`}`
+
+`// Activates knockout.js`
+
+`ko.applyBindings(new ViewModel());`
+
+*Extracted from knockout tutorial (It's possible to define model directly in ViewModel, but it isn't a good practice)*
+
+As said before, knockout only handles data binding. In order to handle rest calls, we had to use jQuery. We also add to implement a little algorithm to manage list filtering.
+
+The good :
+
+- Well documented, haven't encountered difficulties to bring features which may seems complex at first sight
+- Few constraints when structuring the app
+
+The meh :
+
+- We had to pull dependencies to bring some basic features (rest), or implement them (filtering)
+- Low community
 
 Angular team
 ------------
