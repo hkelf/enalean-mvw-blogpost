@@ -1,4 +1,4 @@
-tuleap.js.io.hipster : MV* frameworks investigations
+tuleap.js.io.hipster: MV* frameworks investigations
 ====================================================
 
 Context
@@ -10,17 +10,17 @@ Hypothesis :
 
 We decided to test some MV* framework with compatible licences and which handle two-way data binding.
 
-Data-binding ?
---------------
+Data-binding for dummies
+------------------------
 Frameworks which allow data-binding provide a strong connexion between the model and the view. When the model is modified, the view handles these modifications and vice versa. Such javascript frameworks allow to have both the model and the view on the front-end. We can then implement an observer which will notify the backend when the model is modified.
 
-More details on the [angular documentation](https://docs.angularjs.org/guide/databinding)
+More details on the [angular documentation](https://docs.angularjs.org/guide/databinding).
 
 Candidates
 ----------
-- [Angular](https://angularjs.org/) (MIT) : developped by Google, one of the biggest MVW framework on the market
-- [Ember](http://emberjs.com/) (MIT)   : a framework with a big community
+- VanillaJS
 - [Knockout](http://knockoutjs.com/) (MIT): a small data-binding framework
+- [Angular](https://angularjs.org/) (MIT) : developped by Google, one of the biggest MVW framework on the market
 
 How did we proceed
 ------------------
@@ -32,24 +32,43 @@ Finally, one framework was choosen and we tried to validate the hypothesis.
 
 [Browserify](http://browserify.org/) was choosen to handle libraries dependencies (jQuery...)
 
-<del>Ember</del>Knockout team
------------------------------
-In order to install the last stable release of ember, we had to use [bower](http://bower.io/)(a front-end package manager). But to install bower, we had to install [npm](https://www.npmjs.org/)(another package manager) before.
 
-In summary, we had to install two package managers to install emberjs (the last version of ember on npm was 1.0.0, and the stable version of ember was the 1.5.1...). There was also another issue when using browserify: it only searches dependencies in npm packages and not in bower packages (ember..).
-
-![knockedout](byeEmber.gif)
-
-*Bye bye ember, hello knockout !*
-
-Instead of emberjs, the stable version of knockout can be installed only through npm. So we didn't need bower.
+Knockout team
+-------------
 
 Knockout is very light, it only handles two-way data binding. If we wanted to add new features (like routing), we would have to use an external library. 
 Thanks to the [great tutorial](http://learn.knockoutjs.com/#/?tutorial=intro), it was easy to master the framework and [implement new features](http://knockoutjs.com/documentation/custom-bindings.html).
 
+Comment on a structuré le bouzin :
+
+View <-> ViemModel <-> Model
+
+Le ViewModel est connecté via knockout à la vue. Les elements à binder avec le model sont déclarés grâce aux bindings knockout
+
+*Extrait de code de la vue montrant les attributs bindings*
+
+Du côté du modèle, il s'agit de bêtes "classes" javascript, avec certains attributs liés à la view à l'aide de méthodes fournies par knockout (ko.observe pour que la view prenne la valeur du modèle, ko.value pour que le modèle prenne la valeur d'un input de la vue, etc)
+ 
+
+
 Angular team
 ------------
-TODO
+
+Faut prendre un peu de temps pour comprendre avant de commencer "What da fuck is this error?"
+Structurant
+On a trouvé des exemples (pas tjs très clairs)
+
+
+VanillaJS
+---------
+Problemes de performances sur les deux frameworks (Sur IE 9) (dragndrop)
+On a réfléchi à la piste vanilla js :
+
+- Tout réimplémenter à la main ?
+- Utiliser des libs externes ?
+
+Coût super élevé ? As t on les compétences pour arriver au même résultat et structurer une grosse application js
+
 
 What did we choose and why
 --------------------------
@@ -61,7 +80,7 @@ Angular has :
 - a bigger community
 - more experts to hire
 
-Whatsmore, angular is more structured (and our js is somewhat less), so by applying good practices, we know we will be doing it the right way.
+Whatsmore, Angular is more structured (and our javascript is somewhat less), so by applying good practices, we know we will be doing it the right way.
 
 ![knockedout](knockoutvsangular.gif)
 
