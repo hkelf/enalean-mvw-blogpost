@@ -1,120 +1,93 @@
-tuleap.js.io.hipster: MV* frameworks investigations
+Tuleap.js.io.hipster: MV* frameworks investigations
 ====================================================
+
 
 Context
 -------
-Hypothesis :
+Some users have experienced performances issues when using the Tuleap AgileDashboard with a huge set of data. We have decided to investigate how a MV* framework could answer to these hypothesis:
+    
+* We could have good performances when handeling advanced manipulations (drag 'n' drop, filter...) on a lot of data, all in the same page.
+* This could be done with well structured code and produce good results with only a few lines.
 
-- We could have good performances when handeling a lot data on the same page and while having advanced manipulations like darg'n'drop and filter. (no page refresh)
-- This could be done with well structured code (We are not masters of front-end application architecture) and produce good results with only a few lines.
-
-We decided to test some MV* framework with compatible licences and which handle two-way data binding.
-
-Data-binding for dummies
-------------------------
-Frameworks which allow data-binding provide a strong connexion between the model and the view. When the model is modified, the view handles these modifications and vice versa. Such javascript frameworks allow to have both the model and the view on the front-end. We can then implement an observer which will notify the backend when the model is modified.
-
-More details on the [angular documentation](https://docs.angularjs.org/guide/databinding).
 
 Candidates
 ----------
-- VanillaJS
-- [Knockout](http://knockoutjs.com/) (MIT): a small data-binding framework
-- [Angular](https://angularjs.org/) (MIT) : developped by Google, one of the biggest MVW framework on the market
-
-How did we proceed
-------------------
-We were 4 developers and we had 2 weeks to validate the hypothesis. We choose to split into two sub-teams and learn and test one framework on each side.
-
-After 6 days implementing prototypes, the two teams discussed and explained why their frameworks were awesome. 
-
-Finally, one framework was choosen and we tried to validate the hypothesis.
-
-[Browserify](http://browserify.org/) was choosen to handle libraries dependencies (jQuery...)
+- [Knockout](http://Knockoutjs.com/) [MIT]: a small data-binding framework
+- [AngularJS](https://angularjs.org/) [MIT]: one of the biggest MVW framework on the market
+- [VanillaJS](http://vanilla-js.com/): the good ol' way to write JavaScript
 
 
-Knockout team
--------------
-
-Knockout is very light, it only handles two-way data binding. If we wanted to add new features (like routing), we would have to use an external library. 
-Thanks to the [great tutorial](http://learn.knockoutjs.com/#/?tutorial=intro), it was easy to master the framework and [implement new features](http://knockoutjs.com/documentation/custom-bindings.html).
-
-
-A knockout app architecture :
-
-View <-> ViemModel <-> Model <-> Server
-
-The Model must be mirror of the Server, and the View must display the Model content.
-
-The ViewModel create the link between view and model. View elements are binded to model with data-bind attribute.
-On the Model side, it's only javascript "classes", with some attributes linked to view through knockout methods, like knockout.observable().
-
-`<p>First name: <strong data-bind="text: firstName"></strong></p>`
-
-
-
-`<p>Last name: <strong data-bind="text: lastName"></strong></p>`
-
-
-`function ViewModel() {`
-
-`   this.firstName = ko.observable("Bert");`
+Data-binding for dummies
+------------------------
+Frameworks which allow data-binding provide a strong connexion between the model and the view. When the model is modified, the view handles these modifications and vice versa. Such JavaScript frameworks allow to have both the model and the view on the front-end side. We can then implement an observer which will notify the backend when the model is modified.
     
-`   this.lastName = ko.observable("Bertington");`
+More details: [AngularJS documentation](https://docs.angularjs.org/guide/databinding).
 
-`}`
 
-`// Activates knockout.js`
+Knockout
+--------
+Knockout is a very light JavaScript framework, it only handles two-way data binding. If we wanted to add new features, we would have to use an external library. For exampke, we had to use jQuery to handle REST calls. We also had to implement a little algorithm to manage list filtering.
 
-`ko.applyBindings(new ViewModel());`
+Thanks to this [great tutorial](http://learn.Knockoutjs.com/#/?tutorial=intro), it was easy to master the framework and [implement new features](http://Knockoutjs.com/documentation/custom-bindings.html).
+    
+**The good:**
+   
+* Well documented, haven't encountered difficulties to bring features which may seems complex at the first sight
+* Few constraints when structuring the app
+   
+**The meh:**
+  
+* We had to pull dependencies to bring some basic features (rest), or implement them (filtering)
+* Low community
 
-*Extracted from knockout tutorial (It's possible to define model directly in ViewModel, but it isn't a good practice)*
 
-As said before, knockout only handles data binding. In order to handle rest calls, we had to use jQuery. We also add to implement a little algorithm to manage list filtering.
+AngularJS
+---------
+AngularJS is a complete JavaScript framework. The main idea is also, like Knockout, the data-binding, but it handles also routing, components, filtering, testing... It takes a little time to understand all the mechanic but it's very powerful.
 
-The good :
+![red-green-refacto](red-green-refacto.png)
 
-- Well documented, haven't encountered difficulties to bring features which may seems complex at first sight
-- Few constraints when structuring the app
+As a **framework**, AngularJS brings us the needed structure and workflow to get things done. And as red-green-refactor aficionados, we do like the dependency injection that has been put everywhere in the stack.
 
-The meh :
+**The good:**
 
-- We had to pull dependencies to bring some basic features (rest), or implement them (filtering)
-- Low community
+* We found many resources on the Internet like the good AngularJS documentation which helped us to develop our spike application.
+* Everything is handled by Angular, not only the data-binding
+* Testing framework included
 
-Angular team
-------------
 
-Faut prendre un peu de temps pour comprendre avant de commencer "What da fuck is this error?"
-Structurant
-On a trouvé des exemples (pas tjs très clairs)
+**The meh:**
+
+* It takes a little time to master all the basics
 
 
 VanillaJS
 ---------
-Problemes de performances sur les deux frameworks (Sur IE 9) (dragndrop)
-On a réfléchi à la piste vanilla js :
+Coding without knowing the best practices, we faced to performances issues (drag'n'drop, scrolling...). We knew we could fix them using our frameworks, but it forced us to ask this question: **why not coding all this new application by ourselves?** We would have needed to rewrite all the data-binding architecture, to use external libraries etc.
 
-- Tout réimplémenter à la main ?
-- Utiliser des libs externes ?
-
-Coût super élevé ? As t on les compétences pour arriver au même résultat et structurer une grosse application js
+We didn't go further because we knew that the cost will be to expensive and we don't like to reinvent the wheel.
 
 
 What did we choose and why
 --------------------------
-First, I must say that we thought that knockout.js is a great framework with great documentation, easy to learn and extend. But...
+First of all, we need to compare apples with apples, and pears with pears: AngularJS have to be compared with Knockout + jQuery + a routing lib + a REST lib...
 
-Angular has :
+<script type="text/javascript" src="//www.google.com/trends/embed.js?hl=fr&q=angularjs+%2B+angular.js,+knockoutjs+%2B+knockout.js&cmpt=q&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=600&h=330"></script>
+[Complete Google trends](http://www.google.com/trends/explore#q=angularjs%20%2B%20angular.js%2C%20knockoutjs%20%2B%20knockout.js&cmpt=q)
 
-- features we could need in the future
-- a bigger community
-- more experts to hire
 
-Whatsmore, Angular is more structured (and our javascript is somewhat less), so by applying good practices, we know we will be doing it the right way.
-
-![knockedout](knockoutvsangular.gif)
-
-*knocked out*
+First, I must say that we thought that Knockout.js is a great framework with great documentation, easy to learn and extend. But...
+    
+    AngularJS has :
+    
+    - features we could need in the future
+    - a bigger community
+    - more experts to hire
+    
+    Whatsmore, AngularJS is more structured (and our JavaScript is somewhat less), so by applying good practices, we know we will be doing it the right way.
+    
+    ![knockedout](knockoutvsangular.gif)
+    
+    *knocked out*
 
 
