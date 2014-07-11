@@ -1,5 +1,5 @@
-Tuleap.js.io.hipster: MV* frameworks investigations
-====================================================
+Tuleap.hipster.io.js: MV* frameworks investigations
+===================================================
 
 Some users have experienced performances issues when using the Tuleap AgileDashboard with a huge set of data. We decided to have a spike on how a MV* framework could help. Before we started, we set ourselves a few specific aims:
     
