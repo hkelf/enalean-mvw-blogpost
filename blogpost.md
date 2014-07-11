@@ -72,7 +72,7 @@ First of all, let's keep in mind we need to compare apples with apples and pears
 We thought that Knockout was a great framework with great documentation, easy to learn and extend. But... **AngularJS is the winner** because:
 
 * It's more consistent because you have all the features you'll need out of the box.
-* It's not louder than Knockout
+* It's not heavier than Knockout
 * It forces us to be more structured in our JavaScript development so, by following the docuentation and applying its recommended practices, we know we will be doing things the "right way"".
 * It has also a bigger community, more people talk about it on the Internet. We think it's a better choice for an open source project; more people are familiar with AngularJS so it's easier to encourage contributions than with Knockout. Here are Google trends between the two frameworks:
 
