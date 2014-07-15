@@ -67,7 +67,7 @@ We didn't go any further because the cost would be way too expensive and we don'
 
 And the winner is...
 --------------------
-First of all, let's keep in mind we need to compare apples with apples and pears with pears, i.e. AngularJS should be compared to Knockout + jQuery + a routing lib + a ajax lib...
+First of all, let's keep in mind we need to compare apples with apples and pears with pears, i.e. AngularJS should be compared to Knockout + jQuery + a routing lib + an AJAX lib...
 
 We thought that Knockout was a great framework with great documentation, easy to learn and extend. But... **AngularJS is the winner** because:
 
@@ -80,6 +80,21 @@ We thought that Knockout was a great framework with great documentation, easy to
 
 ![knockedout](knockoutvsangular.gif)
 
+
+And all that for what?
+----------------------
+As stated earlier, we carried-out these investigations because some users experienced performances issues when using the Tuleap AgileDashboard with a huge set of data.
+
+So we've decided to start with a brand new AgileDashboard Planning view which will allow the handling of up to a thousand plannable items (ex: User Stories) in a hundred submilestones (ex: Sprints). For each plannable item, you'll also be able to manage its children (ex: Task).
+
+With all of these items loaded on the page (up to 100000 cards displayed!), you'll be able to drag'n'drop, reorder, inline-edit and filter them.
+
+A picture is worth a thousand words, here are the mock-ups:
+
+![AgileDashboard Planning](agiledashboard-planning-1.png)
+![AgileDashboard Planning](agiledashboard-planning-2.png)
+
+Sexy, huh?
 
 Stay tuned!
 -----------
